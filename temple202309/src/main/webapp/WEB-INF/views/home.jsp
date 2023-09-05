@@ -19,10 +19,13 @@
 <link href="/resources/css/styles.css" rel="stylesheet" />
 </head>
 <body>
+
 	<!-- Navigation-->
 	<nav class="navbar navbar-light bg-light static-top">
 		<div class="container">
-			<a class="navbar-brand" href="#!">Start Bootstrap</a> <a class="btn btn-primary" href="#signup">Sign Up</a>
+			<a class="navbar-brand" href="#!">Start Bootstrap</a>
+			<a class="navbar-brand" href="/board/list">게시판</a>
+			<a class="btn btn-primary" href="#signup">Sign Up</a>
 		</div>
 	</nav>
 	<!-- Masthead-->
