@@ -32,10 +32,12 @@ alter table board add constraint pk_board_bno primary key (bno);
 -- 참조키 제약 조건명 : pk_member_userid
 alter table board add constraint fk_member_userid foreign key (userid) references member(userid) on delete cascade;
 
-
 -- 더미 데이터 추가
-insert into board (bno, title, content, writer) values (seq_board.nextval, '더미 게시글 제목', '더미 게시글 내용', '더미 유저');
-
+insert into board (bno, title, content, userid, visitcount) values (seq_board.nextval, '더미 게시글 제목', '더미 게시글 내용', '테스트', 0);
+insert into board (bno, title, content, userid, visitcount) values (seq_board.nextval, '더미 게시글 제목2', '더미 게시글 내용2', '테스트2', 0);
+insert into board (bno, title, content, userid, visitcount) values (seq_board.nextval, '더미 게시글 제목3', '더미 게시글 내용3', '테스트3', 0);
+insert into board (bno, title, content, userid, visitcount) values (seq_board.nextval, '더미 게시글 제목4', '더미 게시글 내용4', '테스트4', 0);
+select * from board;
 
 - 댓글
 -- 댓글 일련번호 생성
@@ -55,6 +57,14 @@ alter table reply add constraint pk_reply_rno primary key (rno);
 -- 댓글 참조키 제약 조건명 : fk_reply_board_bno
 alter table reply  add constraint fk_reply_board foreign key (bno) references board (bno) on delete cascade; 
 
+insert into reply (rno, bno, reply, replyer) values (seq_reply.nextval, 2, 'ㅋㅋ', '테스트2');
+insert into reply (rno, bno, reply, replyer) values (seq_reply.nextval, 2, 'ㅋㅋ', '테스트2');
+insert into reply (rno, bno, reply, replyer) values (seq_reply.nextval, 3, 'ㅋㅋ', '테스트3');
+insert into reply (rno, bno, reply, replyer) values (seq_reply.nextval, 4, 'ㅋㅋ', '테스트4');
+
 -- 회원가입 쿼리 확인
 insert into member(userid, userpw, username, userphone) values('테스트', '1234', '테스트', '1234');
+insert into member(userid, userpw, username, userphone) values('테스트2', '1234', '테스트2', '1234');
+insert into member(userid, userpw, username, userphone) values('테스트3', '1234', '테스트3', '1234');
+insert into member(userid, userpw, username, userphone) values('테스트4', '1234', '테스트4', '1234');
 select * from MEMBER;

@@ -23,6 +23,7 @@ function result(){
 <body>
 	<H3>회원 로그인 창</H3>
 	<DIV id="detail_table">
+	
 	<form action="${contextPath}/member/login.do" method="post">
 		<TABLE>
 			<TBODY>
@@ -47,5 +48,6 @@ function result(){
 		   <a href="#">고객 센터</a>
 					   
 	</form>		
+	
 </body>
 </html>

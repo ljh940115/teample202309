@@ -1,13 +1,9 @@
 package com.temple202309.member.dao;
 
-import java.util.Map; 
-
-import org.springframework.dao.DataAccessException;
-
 import com.temple202309.member.vo.MemberVO;
 
 public interface MemberDAO {
-	public MemberVO login(Map loginMap) throws DataAccessException;
-	public void insertNewMember(MemberVO memberVO) throws DataAccessException;
-	public String selectOverlappedID(String id) throws DataAccessException;
+	
+	//로그인
+	public MemberVO login(MemberVO mvo) throws Exception;
 }
