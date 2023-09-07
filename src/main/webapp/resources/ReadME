@@ -1,0 +1,3 @@
+src/main/webapp/resources 디렉터리
+
+브라우저가 반드시 참조해야 하는 js, css, image 등을 관리한다.

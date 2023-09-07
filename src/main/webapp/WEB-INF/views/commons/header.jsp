@@ -20,6 +20,6 @@
 	<!-- Navigation-->
 	<nav class="navbar navbar-light bg-light static-top">
 		<div class="container">
-			<a class="navbar-brand" href="/">Start Bootstrap</a> <a class="navbar-brand" href="/board/list">게시판</a> <a class="btn btn-primary" href="${contextPath}/login">로그인</a> <a class="btn btn-primary" href="#">회원가입</a>
+			<a class="navbar-brand" href="/">Start Bootstrap</a> <a class="navbar-brand" href="/board/list">게시판</a> <a class="btn btn-primary" href="${contextPath}/member/customLogin">로그인</a> <a class="btn btn-primary" href="#">회원가입</a>
 		</div>
 	</nav>

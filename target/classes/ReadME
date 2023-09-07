@@ -1,0 +1,5 @@
+src/main/resources 디렉터리
+
+templates: 화면과 관련된 파일을 관리, 타임리프(Thymeleaf) 템플릿 엔진의 사용 권장
+static: css, fonts, images, plugin, scripts 등의 정적 리소스 파일 위치
+application.properties: 웹 애플리케이션을 실행하면서 자동으로 로딩되는 파일

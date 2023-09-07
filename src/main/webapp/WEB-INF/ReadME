@@ -1,0 +1,4 @@
+src/main/webapp/WEB-INF 디렉터리
+
+Web Information의 약자로 web에 관련된 정보를 의미한다.
+외부에서 접근 불가능, 컨트롤러를 경유

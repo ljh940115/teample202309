@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="customAccessDenied" class="com.temple202309.security.CustomAccessDeniedHandler"></bean>
+	<bean id="customLoginSuccess" class="com.temple202309.security.CustomLoginSuccessHandler"></bean>
+	<!-- <bean id="customPasswordEncoder" class="com.temple202309.security.CustomNoOpPasswordEncoder"></bean> 미리 지정된 형식으로 테이블을 사용하는 경우 -->
+	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+	<!-- 스프링 동작하기 위해 authentication-manager와 스프링 시큐리티 시작점 필요 -->
+	<!-- 
+	pattern : 경로
+	access : 접근 권한
+	 -->
+	<security:http>
+		<security:intercept-url pattern="/sample/all" access="permitAll" />
+		<security:intercept-url pattern="/sample/member" access="hasRole('ROLE_MEMBER')" />
+		<security:intercept-url pattern="/sample/admin" access="hasRole('ROLE_ADMIN')" />
+		<security:access-denied-handler ref="customAccessDenied" />
+		<!-- <security:form-login /> ↓ 스프링 제공 로그인 페이지 대신 커스텀 로그인 사용하기 위해 아래 사용 -->
+		<!-- <security:form-login login-page="/member/customLogin" /> ↓ 호출부터 시작해서 로그인하면 사용자 권한에 따라 다른 페이지 호출 --> 
+		<security:form-login login-page="/member/customLogin" authentication-success-handler-ref="customLoginSuccess" />
+		<!-- <security:access-denied-handler error-page="/accessError"/> ↑ 위에 핸들러 사용 -->
+		<security:logout logout-url="/member/customLogout" invalidate-session="true" />
+	</security:http>
+
+	<!-- 인증과 권한 실제 처리 -->
+<!-- 	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:user-service>
+				<security:user name="member" password="{noop}member" authorities="ROLE_MEMBER"/>
+				<security:user name="admin" password="{noop}admin" authorities="ROLE_MEMBER, ROLE_ADMIN"/>
+			</security:user-service>
+		</security:authentication-provider>
+	</security:authentication-manager> -->
+
+	<security:authentication-manager>
+		<security:authentication-provider>
+				<!-- <security:jdbc-user-service data-source-ref="dataSource" /> -->
+				 <security:jdbc-user-service 
+				 data-source-ref="dataSource" users-by-username-query="select userid username, userpw password, enabled from member where userid = ? " authorities-by-username-query="username username, authority authority from authorities where username = ? " />
+				<!-- <security:password-encoder ref="customPasswordEncoder" /> 미리 지정된 형식으로 테이블을 사용하는 경우, ↓ 사용자 지정 테이블 사용을 위해 -->
+				<security:password-encoder ref="bcryptPasswordEncoder" />
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+</beans>

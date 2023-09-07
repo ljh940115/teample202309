@@ -1,0 +1,3 @@
+src/test/java 디렉터리
+
+패키지 내에 있는 ApplicationTests 클래스를 통해 각각의 개발 단계에 알맞은 테스트를 진행할 수 있다.
