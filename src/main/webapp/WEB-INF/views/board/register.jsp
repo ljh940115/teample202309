@@ -2,7 +2,7 @@
   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
+<%@include file="../commons/header.jsp"%>
 
 
 <div class="row">
@@ -32,8 +32,9 @@
           </div>
 
           <div class="form-group">
-            <label>Writer</label> <input class="form-control" name='writer'>
-          </div>
+            <input type="hidden" class="form-control" name='userid'
+    		value='<c:out value="${MEMBER.userid }" />' readonly="readonly">
+          </div>   
           <button type="submit" class="btn btn-default">SubmitButton</button>
           <button type="reset" class="btn btn-default">Reset Button</button>
         </form>
@@ -47,4 +48,4 @@
   <!-- end panel -->
 </div>
 <!-- /.row -->
-
+<%@include file="../commons/footer.jsp"%>

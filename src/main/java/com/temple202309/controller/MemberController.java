@@ -4,9 +4,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.temple202309.domain.MemberVO;
 import com.temple202309.mapper.MemberMapper;
@@ -59,4 +62,34 @@ public class MemberController {
 			memberMapper.insertMember(member);
 			return "home";
 		}
+		
+		@GetMapping("/login/myPage")
+		public String myPage() {
+			return "login/myPage";
+		}
+		
+		@GetMapping("/login/userUpdate")
+		public String userUpdate() {
+			return "login/userUpdate";
+		}
+		
+		@GetMapping("/login/userDelete")
+		public String userDelete() {
+			return "login/userDelete";
+		}
+		
+		@PostMapping("/login/userUpdate")
+		public String userUpdateDone() {
+			return "home";
+		}
+		
+		@GetMapping("/login/userDeletedone")
+		 public String remove(@RequestParam("userid") String userid, RedirectAttributes rttr) {
+			  
+			      if (memberMapper.deleteUser(userid) != null) {
+			         rttr.addFlashAttribute("result", "success");
+			      }
+
+		      return "redirect:/board/list";
+		   }
 }

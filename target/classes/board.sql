@@ -47,6 +47,7 @@ values (seq_board.nextval, '더미 게시글 제목', '더미 게시글 내용',
 
 
 select*from member;
+select*from board;
 
 - 댓글
 -- 댓글 일련번호 생성
@@ -66,7 +67,11 @@ alter table reply add constraint pk_reply_rno primary key (rno);
 -- 댓글 참조키 제약 조건명 : fk_reply_board_bno
 alter table reply  add constraint fk_reply_board foreign key (bno) references board (bno) on delete cascade; 
 
-
+insert into board (bno,title,content)
+		values (
+		  10000
+		, '제목 추가'
+		, '내용 추가');
 
 		select 
 		bno, title, content, userid, regdate, updatedate 
@@ -80,14 +85,28 @@ alter table reply  add constraint fk_reply_board foreign key (bno) references bo
 		
 		
 	
+select 
+		bno, title, content, userid, regdate, updatedate 
+		from 
+		( 
+		select /*+INDEX_DESC(board pk_board) */ 
+		rownum rn, bno, title, content, userid, regdate, updatedate 
+		from 
+		board 
+		where rownum <= 10
+		)
+		where rn > 1;			
+
+select 
+		bno, title, content, userid, regdate,visitcount
+		from board order by desc; 
+
+select * from member;
+select *  from board ;
 
 
-
-
-
-
-
-
+select rownum num, * from board; 
+SELECT ROWNUM AS NUM, board.* FROM board ORDER BY NUM DESC;
 
 
 

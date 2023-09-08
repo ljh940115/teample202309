@@ -16,5 +16,14 @@
 		#{userid}, #{userpw}, #{username},
 		#{userphone})
 	</insert>
+	<update id="updateUser" parameterType="com.temple202309.domain.MemberVO" >
+	UPDATE member
+	SET userphone = #{userphone}
+	WHERE uesrid = #{uesrid}
+	</update>
+	
+	<delete id="deleteUser" >
+	 DELETE FROM member WHERE userid = #{userid}
+	</delete>
 
 </mapper>

@@ -15,7 +15,7 @@
 
 	<form action="login" method="post">
 		id : <input type="text" name="userid"> <br> 
-		pw : <input type="text" name="userpw"> <br>
+		pw : <input type="password" name="userpw"> <br>
 		<button type="submit">로그인</button> 
 	</form>
 

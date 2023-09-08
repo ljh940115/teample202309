@@ -12,7 +12,7 @@
 			<div class="col-xl-6">
 				<div class="text-center text-white">
 					<!-- Page heading-->
-					<h1 class="mb-5">Generate more leads with a professional landing page!</h1>
+					<h1 class="mb-5">고양이 커뮤니티에 오신 것을 환영합니다!</h1>
 					<!-- Signup form-->
 					<!-- * * * * * * * * * * * * * * *-->
 					<!-- * * SB Forms Contact Form * *-->

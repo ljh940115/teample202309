@@ -17,16 +17,20 @@
   <form method='post' action="/login/memberRegist">
   
   <div>
-    <input type='text' name='userid'>
+  <label>아이디</label>
+    <input type='text' name='userid' placeholder="아이디를 입력하세요.">
   </div>
   <div>
-    <input type='password' name='userpw'>
+  <label>비밀번호</label>
+    <input type='password' name='userpw' placeholder="비밀번호를 입력하세요.">
   </div>
   <div>
-    <input type='text' name='username'>
+  <label>이름</label>
+    <input type='text' name='username' placeholder="이름을 입력하세요.">
   </div>
   <div>
-    <input type='text' name='userphone'>
+  <label>핸드폰 번호</label>
+    <input type='text' name='userphone' placeholder="ex) 010-0000-0000">
   </div>
   <div>
     <input type='submit'>

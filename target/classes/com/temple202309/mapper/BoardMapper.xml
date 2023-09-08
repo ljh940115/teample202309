@@ -8,15 +8,18 @@
 		
 	
 	<![CDATA[
-		select 
-		bno, title, content, userid, regdate,visitcount
-		from board
+		   SELECT ROWNUM AS NUM, board.*
+    FROM board
+    ORDER BY NUM DESC
 		]]>
 	</select>
 
 	<insert id="insert">
-		insert into board (bno,title,content,userid,visitcount)
-		values (seq_board.nextval, #{title}, #{content}, #{userid}, #{visitcount})
+		insert into board (bno,title,content)
+		values (
+		  seq_board.nextval
+		, #{title, jdbcType=VARCHAR}
+		, #{content, jdbcType=VARCHAR}
 	</insert>
 
 	<insert id="insertSelectKey">
@@ -26,8 +29,13 @@
 			select seq_board.nextval from dual
 		</selectKey>
 
-		insert into board (bno,title,content,userid,visitcount)
-		values (#{bno},#{title}, #{content}, #{userid}, #{visitcount})
+		insert into board (bno,title,content,userid, visitcount)
+		values (
+		  #{bno}
+		, #{title}
+		, #{content}
+		, #{userid}
+		, 0)
 	</insert>
 
 	<select id="read" resultType="com.temple202309.domain.BoardVO">
@@ -37,20 +45,19 @@
 
 
 	<delete id="delete">
-		delete board where bno = #{bno}
+		delete from board where bno =#{bno};
 	</delete>
 
 	<update id="update">
 		update board
 		set title= #{title},
 		content=#{content},
-		userid = #{userid},
 		updatedate = sysdate
 		where bno =
 		#{bno}
 	</update>
 	
-		<sql id="criteria">
+ 		<sql id="criteria">
 			<trim prefix="(" suffix=") AND " prefixOverrides="OR">
 				<foreach item='type' collection="typeArr">
 					<trim prefix="OR">
@@ -69,7 +76,7 @@
 				</foreach>
 			</trim>
 		</sql>
-		
+
 		<select id="getListWithPaging"
 		resultType="com.temple202309.domain.BoardVO"> 
 		<![CDATA[ 
@@ -81,12 +88,10 @@
 		rownum rn, bno, title, content, userid, regdate, updatedate 
 		from 
 		board 
-		where bno >20)
-		
-	
+		where rownum <= 10
+		)
+		where rn > 1		
 		]]>		
-
-
 	</select>
 
 	<select id="getTotalCount" resultType="int">
