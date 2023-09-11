@@ -1,0 +1,6 @@
+ src/main/webapp/WEB-INF/spring 디렉토리
+ 
+ Spring 환경설정 파일(context)가 보관되는 곳
+ ������ ȯ�漳�� ����(context)�� �����Ǵ� ����
+
+* �Ϲ� �ý��ۿ� userId�� ������ ��ť��Ƽ���� userName�� �ش� 한글 수정 필요

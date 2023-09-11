@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.temple202309.mapper.BoardMapper">
+
+	<select id="getList" resultType="com.temple202309.domain.BoardVO">
+		
+	
+	<![CDATA[
+		   SELECT ROWNUM AS NUM, board.*
+    FROM board
+    ORDER BY NUM DESC
+		]]>
+	</select>
+
+	<insert id="insert">
+		insert into board (bno,title,content)
+		values (
+		  seq_board.nextval
+		, #{title, jdbcType=VARCHAR}
+		, #{content, jdbcType=VARCHAR}
+	</insert>
+
+	<insert id="insertSelectKey">
+
+		<selectKey keyProperty="bno" order="BEFORE"
+			resultType="long">
+			select seq_board.nextval from dual
+		</selectKey>
+
+		insert into board (bno,title,content,userid, visitcount)
+		values (
+		  #{bno}
+		, #{title}
+		, #{content}
+		, #{userid}
+		, 0)
+	</insert>
+
+	<select id="read" resultType="com.temple202309.domain.BoardVO">
+		select * from board where bno =
+		#{bno}
+	</select>
+
+
+	<delete id="delete">
+		delete from board where bno =#{bno};
+	</delete>
+
+	<update id="update">
+		update board
+		set title= #{title},
+		content=#{content},
+		updatedate = sysdate
+		where bno =
+		#{bno}
+	</update>
+	
+ 		<sql id="criteria">
+			<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+				<foreach item='type' collection="typeArr">
+					<trim prefix="OR">
+						<choose>
+							<when test="type == 'T'.toString()">
+								title like '%'|| #{keyword}||'%'
+							</when>
+							<when test="type == 'C'.toString()">
+								content like '%'|| #{keyword}||'%'
+							</when>
+							<when test="type == 'W'.toString()">
+								writer like '%'|| #{keyword}||'%'
+							</when>
+						</choose>
+					</trim>
+				</foreach>
+			</trim>
+		</sql>
+
+		<select id="getListWithPaging"
+		resultType="com.temple202309.domain.BoardVO"> 
+		<![CDATA[ 
+		select 
+		bno, title, content, userid, regdate, updatedate 
+		from 
+		( 
+		select /*+INDEX_DESC(board pk_board) */ 
+		rownum rn, bno, title, content, userid, regdate, updatedate 
+		from 
+		board 
+		where rownum <= 10
+		)
+		where rn > 1		
+		]]>		
+	</select>
+
+	<select id="getTotalCount" resultType="int">
+		select count(*) from
+		board where 
+		
+		<include refid="criteria"></include>
+		
+		bno > 0
+	</select>
+</mapper>
+	

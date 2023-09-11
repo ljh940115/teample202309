@@ -1,0 +1,5 @@
+src/main/java 디렉토리
+
+자바(.java) 파일이 모여있는 곳
+패키지를 생성해 관리
+여기서 com.spring.패키지명 에 Controller를 저장해야 한다.
